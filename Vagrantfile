@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
     config.vm.provision :salt do |salt|
 
       salt.masterless = true
-      #salt.minion_config = "salt/minion"
+      salt.minion_config = "salt/minion"
       salt.run_highstate = false
 
     end
@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
