@@ -10,6 +10,7 @@ Vagrant.configure(2) do |config|
     ## For masterless, mount your salt file root
     config.vm.synced_folder "salt/roots/", "/srv/salt/"
     config.vm.synced_folder "core", "/home/vagrant/core"
+    
 
     ## Use all the defaults:
     config.vm.provision :salt do |salt|
