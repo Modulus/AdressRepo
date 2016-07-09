@@ -18,6 +18,13 @@ Vagrant.configure(2) do |config|
       salt.minion_config = "salt/minion"
       salt.run_highstate = false
 
+
+
+    end
+
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 2048
+        v.cpus = 2
     end
 
   # The most common configuration options are documented and commented below.
