@@ -6,11 +6,13 @@ mongodb repository:
     - keyserver: hkp://keyserver.ubuntu.com
     - keyid: EA312927
     - require_in:
-      - pkg: install mongodb
+      - pkg: mongodb-org
 
-install mongodb:
+mongodb-org:
   pkg.installed:
     - name: mongodb-org
+    - watch:
+      - file: /etc/mongod.conf
     - require_in:
       - service: mongod
 
@@ -18,3 +20,8 @@ mongod:
   service.running:
     - name: mongod
     - enable: True
+
+/etc/mongod.conf:
+  file.replace:
+    - pattern: "bindIp: 127.0.0.1"
+    - repl: "bindIp: {{ grains['ip4_interfaces']['eth1'][0] }}"

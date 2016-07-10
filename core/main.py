@@ -46,7 +46,7 @@ for line in read_file(filepath):
     if parts and len(parts) >= 12:
         address = {
             "country_code": parts[0],
-            "postal_cod": parts[1],
+            "postal_code": parts[1],
             "place_name": parts[2],
             "admin_name1": parts[3],
             "admin_code1": parts[4],
