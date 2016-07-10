@@ -11,8 +11,6 @@ mongodb repository:
 mongodb-org:
   pkg.installed:
     - name: mongodb-org
-    - watch:
-      - file: /etc/mongod.conf
     - require_in:
       - service: mongod
 
@@ -20,8 +18,12 @@ mongod:
   service.running:
     - name: mongod
     - enable: True
+    - watch:
+      - file: /etc/mongod.conf
 
 /etc/mongod.conf:
   file.replace:
     - pattern: "bindIp: 127.0.0.1"
     - repl: "bindIp: {{ grains['ip4_interfaces']['eth1'][0] }}"
+    - require:
+      - pkg: mongodb-org

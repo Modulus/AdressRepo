@@ -8,11 +8,18 @@
 Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/trusty64"
     ## For masterless, mount your salt file root
+    config.landrush.enabled = true
     config.vm.synced_folder "salt/roots/", "/srv/salt/"
     config.vm.synced_folder "core", "/home/vagrant/core"
 
-    #config.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
-    config.vm.network "public_network" #, ip: "192.168.52.11"
+    config.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
+    config.vm.network "private_network" , ip: "192.168.52.11"
+
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 2048
+        v.cpus = 2
+    end
+
     ## Use all the defaults:
     config.vm.provision :salt do |salt|
 
@@ -24,10 +31,7 @@ Vagrant.configure(2) do |config|
 
     end
 
-    config.vm.provider "virtualbox" do |v|
-        v.memory = 2048
-        v.cpus = 2
-    end
+
 
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
