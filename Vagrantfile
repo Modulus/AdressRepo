@@ -10,9 +10,12 @@ Vagrant.configure(2) do |config|
     ## For masterless, mount your salt file root
     config.landrush.enabled = true
     config.vm.synced_folder "salt/roots/", "/srv/salt/"
+    config.vm.synced_folder "salt/modules", "/srv/salt/modules"
     config.vm.synced_folder "core", "/home/vagrant/core"
+    config.vm.synced_folder "nodeapp", "/home/vagrant/nodeapp"
 
     config.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
+    config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
     config.vm.network "private_network" , ip: "192.168.52.11"
 
     config.vm.provider "virtualbox" do |v|

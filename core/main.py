@@ -2,6 +2,8 @@
 import sys
 
 from pymongo import MongoClient
+from pymongo import ASCENDING
+
 
 # Read file in a generator expression
 def read_file(path):
@@ -37,9 +39,24 @@ print("Using file: {}".format(filepath))
 
 
 client = MongoClient("mongodb://localhost:27017")
-db = client.adr
+db = client.demo
 address_col = db.address
+
+#Delete collection if present
+print("Dropping collection of addresses")
 address_col.delete_many({})
+
+
+#Create compound indices for full text search
+address_col.create_index([
+     ("country_code", ASCENDING),
+     ("postal_code", ASCENDING),
+     ("place_name", ASCENDING),
+     ("admin_name1", ASCENDING),
+     ("admin_name2", ASCENDING),
+     ("admin_name3", ASCENDING),
+ ])
+
 
 # Split line on the tab character since this is the delimiter.
 for line in read_file(filepath):
