@@ -3,3 +3,4 @@ base:
     - mongodb
     - files
     - tools.python
+    - tools.node

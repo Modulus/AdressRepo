@@ -18,12 +18,12 @@ mongod:
   service.running:
     - name: mongod
     - enable: True
-    - watch:
-      - file: /etc/mongod.conf
+#    - watch:
+#      - file: /etc/mongod.conf
 
-/etc/mongod.conf:
-  file.replace:
-    - pattern: "bindIp: 127.0.0.1"
-    - repl: "bindIp: {{ grains['ip4_interfaces']['eth1'][0] }}"
-    - require:
-      - pkg: mongodb-org
+#/etc/mongod.conf:
+#  file.replace:
+#    - pattern: "bindIp: 127.0.0.1"
+#    - repl: "bindIp: {% for ip in grains['ipv4'] %}{{ip}}{% if not loop.last %},{% endif %}{% endfor %}"
+#    - require:
+#      - pkg: mongodb-org

@@ -3,7 +3,7 @@ import sys
 
 from pymongo import MongoClient
 
-
+# Read file in a generator expression
 def read_file(path):
     with open(path, "r") as fs:
         while True:
@@ -37,8 +37,9 @@ print("Using file: {}".format(filepath))
 
 
 client = MongoClient("mongodb://localhost:27017")
-db = client.test
+db = client.adr
 address_col = db.address
+address_col.delete_many({})
 
 # Split line on the tab character since this is the delimiter.
 for line in read_file(filepath):
@@ -56,11 +57,10 @@ for line in read_file(filepath):
             "admin_code3": parts[8],
             "latitude": parts[9],
             "longitude": parts[10],
-            "accuracy": parts[11]
+            "accuracy": parts[11].strip()
         }
         address_col.insert(address)
     else:
         print("Error!!!")
 
 print("Done importing all data")
-

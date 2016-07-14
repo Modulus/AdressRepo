@@ -2,3 +2,4 @@
 .vagrant
 *.iml
 *.log
+node_modules
