@@ -21,9 +21,10 @@ mongod:
 #    - watch:
 #      - file: /etc/mongod.conf
 
-#/etc/mongod.conf:
-#  file.replace:
-#    - pattern: "bindIp: 127.0.0.1"
-#    - repl: "bindIp: {% for ip in grains['ipv4'] %}{{ip}}{% if not loop.last %},{% endif %}{% endfor %}"
-#    - require:
-#      - pkg: mongodb-org
+/etc/mongod.conf:
+  file.replace:
+    - pattern: "bindIp: 127.0.0.1"
+    #- repl: "bindIp: {% for ip in grains['ipv4'] %}{{ip}}{% if not loop.last %},{% endif %}{% endfor %}"
+    - repl: "bindIp: 0.0.0.0"
+    - require:
+      - pkg: mongodb-org
