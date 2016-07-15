@@ -1,13 +1,15 @@
 #!/usr/bin/python
+# coding=utf-8
+import codecs
 import sys
 
 from pymongo import MongoClient
-from pymongo import ASCENDING
+from pymongo import TEXT
 
 
 # Read file in a generator expression
 def read_file(path):
-    with open(path, "r") as fs:
+    with codecs.open(path, "r", encoding="UTF-8") as fs:
         while True:
             data = fs.readline()
             if data:
@@ -46,16 +48,18 @@ address_col = db.address
 print("Dropping collection of addresses")
 address_col.delete_many({})
 
-
 #Create compound indices for full text search
 address_col.create_index([
-     ("country_code", ASCENDING),
-     ("postal_code", ASCENDING),
-     ("place_name", ASCENDING),
-     ("admin_name1", ASCENDING),
-     ("admin_name2", ASCENDING),
-     ("admin_name3", ASCENDING),
- ])
+    ("country_code", TEXT),
+    ("postal_code", TEXT),
+    ("place_name", TEXT),
+    ("admin_name1", TEXT),
+    ("admin_name2", TEXT),
+    ("admin_name3", TEXT),
+])
+
+
+
 
 
 # Split line on the tab character since this is the delimiter.

@@ -3,4 +3,4 @@
 *.iml
 *.log
 node_modules
-nodeapp/bin
+node_app/bin

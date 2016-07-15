@@ -12,7 +12,6 @@ Vagrant.configure(2) do |config|
     config.vm.synced_folder "salt/roots/", "/srv/salt/"
     config.vm.synced_folder "salt/modules", "/srv/salt/modules"
     config.vm.synced_folder "core", "/home/vagrant/core"
-    config.vm.synced_folder "nodeapp", "/home/vagrant/nodeapp"
 
     config.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
     config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true

@@ -18,8 +18,8 @@ mongod:
   service.running:
     - name: mongod
     - enable: True
-#    - watch:
-#      - file: /etc/mongod.conf
+    - watch:
+      - file: /etc/mongod.conf
 
 /etc/mongod.conf:
   file.replace:
